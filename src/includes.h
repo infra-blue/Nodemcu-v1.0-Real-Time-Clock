@@ -1,2 +1,4 @@
-#include "../lib\font_data.h"
+#pragma once
+
+#include <../lib/font_data.h>
 #include <../configs/config.h>

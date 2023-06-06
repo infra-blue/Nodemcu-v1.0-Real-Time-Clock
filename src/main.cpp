@@ -16,6 +16,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <NTPClient.h>
+#include <Timezone_Generic.h>
 #include <includes.h>
 
 MD_Parola matrix = MD_Parola(MD_MAX72XX::FC16_HW, DATA_PIN, CLK_PIN, CS_PIN, 4);
@@ -26,11 +27,10 @@ NTPClient timeClient(ntpUDP, SERVER1);
 bool dots = false;
 int maxtimeout = 20;
 
-char iso8601dateTime[20] = "2000-01-01T00:00:00";
 char hh_mm[] = "00:00";
 char ss[] = "00";
 
-void getTime() {
+void printTime() {
   dots = !dots;
   sprintf(hh_mm, "%02d%c%02d ", (rtc.now()).hour(), (dots ? ':' : ' '), (rtc.now()).minute());
   sprintf(ss, "%02d", (rtc.now()).second());
@@ -73,13 +73,8 @@ void setup() {
     while(!timeClient.isTimeSet())
       delay(50);
 
-    timeClient.setTimeOffset(TMZ + (is_dst ? DST : 0));
-    time_t now = timeClient.getEpochTime();
-    struct tm *timestructure = localtime(&now);
-
-    strftime(iso8601dateTime, sizeof(iso8601dateTime), "%FT%T", timestructure);
-
-    rtc.adjust(DateTime(iso8601dateTime));
+    time_t now = CE.toLocal(timeClient.getEpochTime());
+    rtc.adjust(DateTime(now));
     Serial.print("Time Update.\n");
     WiFi.disconnect();
   }
@@ -88,10 +83,7 @@ void setup() {
     WiFi.disconnect();
   }
 
-  time_t now = rtc.now().unixtime();
-  struct tm *timestructure = localtime(&now);
-  strftime(iso8601dateTime, sizeof(iso8601dateTime), "%FT%T", timestructure);
-  Serial.printf("%s\n", iso8601dateTime);
+  Serial.printf("%02d/%02d/%d\n%02d:%02d:%02d", (rtc.now()).day(), (rtc.now()).month(), (rtc.now()).year(), (rtc.now()).hour(), (rtc.now()).minute(), (rtc.now()).second());
 
   matrix.setZone(0, 0, 0);
   matrix.setZone(1, 1, 3);
@@ -102,7 +94,7 @@ void setup() {
 }
 
 void loop() {
-  getTime();
+  printTime();
   matrix.displayAnimate();
   matrix.displayReset(0);
   matrix.displayReset(1);
