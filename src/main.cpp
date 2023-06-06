@@ -30,10 +30,15 @@ int maxtimeout = 20;
 char hh_mm[] = "00:00";
 char ss[] = "00";
 
-void printTime() {
-  dots = !dots;
-  sprintf(hh_mm, "%02d%c%02d ", (rtc.now()).hour(), (dots ? ':' : ' '), (rtc.now()).minute());
-  sprintf(ss, "%02d", (rtc.now()).second());
+void autoSetIntensity(int hour) {
+  if(hour >= 0 && hour <= 5)
+    matrix.setIntensity(0);
+  else if(hour >= 6 && hour <= 8)
+    matrix.setIntensity(10);
+  else if(hour >= 9 && hour <= 22)
+    matrix.setIntensity(15);
+  else
+    matrix.setIntensity(5);
 }
 
 void setup() {
@@ -94,7 +99,16 @@ void setup() {
 }
 
 void loop() {
-  printTime();
+  dots = !dots;
+  sprintf(hh_mm, "%02d%c%02d ", (rtc.now()).hour(), (dots ? ':' : ' '), (rtc.now()).minute());
+  sprintf(ss, "%02d", (rtc.now()).second());
+
+  static uint32_t lastTime = 0;
+  if(millis() - lastTime >= 60 * 1000) {
+    autoSetIntensity((rtc.now()).hour());
+    lastTime = millis();
+  }
+
   matrix.displayAnimate();
   matrix.displayReset(0);
   matrix.displayReset(1);
