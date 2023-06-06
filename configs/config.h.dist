@@ -1,0 +1,34 @@
+/**
+ * @file config.c
+ * 
+ * @brief
+ * place here your:
+ * 
+ * network configurations
+ * ntp servers address
+ * timezone
+ * your max7219 pins
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+#pragma once
+
+#define SSID "NTP-RTC"
+#define PASSWORD "xxxx0xxxx"
+
+#define SERVER1 "time.inrim.it"
+#define SERVER2 "0.it.pool.ntp.org"
+#define SERVER3 "time.windows.com"
+#define SERVER4 "pool.ntp.org"
+#define SERVER5 "ntp1.inrim.it"
+#define SERVER6 "ntp2.inrim.it"
+
+#define is_dst true         //change to false in winter
+
+#define TMZ  3600           //timezone:             +1 Central European Time
+#define DST  3600           //daylight saving time: +2 Central European Summer Time
+
+#define CLK_PIN   D5
+#define DATA_PIN  D7
+#define CS_PIN    D8
