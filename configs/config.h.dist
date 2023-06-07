@@ -2,6 +2,8 @@
  * @file config.h
  * 
  * @brief
+ *     Change the file name in "config.h"
+ *
  *     Place here your:
  * 
  *      your max7219 pins

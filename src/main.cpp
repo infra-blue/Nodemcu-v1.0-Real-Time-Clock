@@ -13,7 +13,7 @@
 MD_Parola matrix = MD_Parola(MD_MAX72XX::FC16_HW, DATA_PIN, CLK_PIN, CS_PIN, 4);
 RTC_DS3231 rtc;
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, SERVER1);
+NTPClient timeClient(ntpUDP, NTPserver);
 
 bool dots = false;
 int maxtimeout = 25;
