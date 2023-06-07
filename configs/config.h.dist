@@ -2,30 +2,29 @@
  * @file config.h
  * 
  * @brief
- * place here your:
+ *     Place here your:
  * 
- * your max7219 pins
- * network configurations
- * ntp servers address
- * timezone
+ *      your max7219 pins
+ *      network configurations
+ *      ntp server address (check data/ntpservers.h)
+ *      timezone (check data/timezones.h to choose yours or add a new one)
  * 
  * @copyright Copyright (c) 2023
  * 
  */
+
 #pragma once
+
+#include "../data/timezones.h"
+#include "../data/ntpservers.h"
 
 #define CLK_PIN   D5
 #define DATA_PIN  D7
 #define CS_PIN    D8
 
-#define SSID "NTP-RTC"
-#define PASSWORD "xxxxxx11"
+const char SSID[] = "NTP-RTC";
+const char PASSWORD[] = "xxxxxx11";
 
-#define SERVER1 "time.inrim.it"
-#define SERVER2 "0.it.pool.ntp.org"
-#define SERVER3 "time.windows.com"
-#define SERVER4 "pool.ntp.org"
-#define SERVER5 "ntp1.inrim.it"
-#define SERVER6 "ntp2.inrim.it"
+const char NTPserver[] = SERVER1;
 
-Timezone MyTMZ = CE;  //check timezones.h to choose yours or add a new one
+Timezone MyTMZ = CE;

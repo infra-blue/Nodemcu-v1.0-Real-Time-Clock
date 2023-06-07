@@ -1,1 +1,1 @@
-# ESP8266-RTC-NTP
+# NodeMCU v1.0 clock

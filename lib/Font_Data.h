@@ -1,4 +1,12 @@
+/**
+ * @file Font_Data.h
+ * 
+ * @brief 
+ *    Font data used for displaying the time
+ */
+
 #pragma once
+
 #include <MD_MAX72xx.h>
 
 MD_MAX72XX::fontType_t numeric7Seg[] PROGMEM = 

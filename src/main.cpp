@@ -8,15 +8,6 @@
  * @copyright GPL3 Copyright (c) 2023 
  * 
  */
-#include <Arduino.h>
-#include <MD_MAX72xx.h>
-#include <MD_Parola.h>
-#include <RTClib.h>
-#include <SPI.h>
-#include <ESP8266WiFi.h>
-#include <WiFiUdp.h>
-#include <NTPClient.h>
-#include <Timezone_Generic.h>
 #include <includes.h>
 
 MD_Parola matrix = MD_Parola(MD_MAX72XX::FC16_HW, DATA_PIN, CLK_PIN, CS_PIN, 4);
@@ -25,7 +16,7 @@ WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, SERVER1);
 
 bool dots = false;
-int maxtimeout = 20;
+int maxtimeout = 25;
 
 char hh_mm[] = "00:00";
 char ss[] = "00";
@@ -35,10 +26,12 @@ void autoSetIntensity(int hour) {
     matrix.setIntensity(0);
   else if(hour >= 6 && hour <= 8)
     matrix.setIntensity(10);
-  else if(hour >= 9 && hour <= 22)
+  else if(hour >= 9 && hour <= 21)
     matrix.setIntensity(15);
-  else
+  else if(hour >= 22 && hour <= 23)
     matrix.setIntensity(5);
+  else
+    matrix.setIntensity(15);
 }
 
 void setup() {
@@ -75,13 +68,18 @@ void setup() {
     timeClient.update();
     delay(500);
 
-    while(!timeClient.isTimeSet())
-      delay(50);
-
-    time_t now = CE.toLocal(timeClient.getEpochTime());
-    rtc.adjust(DateTime(now));
-    Serial.print("Time Update.\n");
-    WiFi.disconnect();
+    for(timeout = 0; !timeClient.isTimeSet() && timeout <= maxtimeout; timeout++)
+      delay(500);
+    
+    if(timeClient.isTimeSet() && timeout != maxtimeout) {
+      time_t now = CE.toLocal(timeClient.getEpochTime());
+      rtc.adjust(DateTime(now));
+      Serial.print("Time Update.\n");
+      WiFi.disconnect();
+    } else {
+      Serial.printf("\nCan't get time from NTP server, disconnecting...\n");
+      WiFi.disconnect();
+    }
   }
   else {
     Serial.printf("\nNot connected, can't sync time.\n");
@@ -105,6 +103,9 @@ void loop() {
 
   static uint32_t lastTime = 0;
   if(millis() - lastTime >= 60 * 1000) {
+    /**
+     *    Every 60 seconds
+     */
     autoSetIntensity((rtc.now()).hour());
     lastTime = millis();
   }
@@ -112,5 +113,6 @@ void loop() {
   matrix.displayAnimate();
   matrix.displayReset(0);
   matrix.displayReset(1);
+
   delay(500);
 }

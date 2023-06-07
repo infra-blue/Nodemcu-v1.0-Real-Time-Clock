@@ -10,6 +10,7 @@
  */
 
 #pragma once
+#include <Timezone_Generic.h>
 
 //Central European Time (Rome)
 TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     // Central European Summer Time = UTC + 2
