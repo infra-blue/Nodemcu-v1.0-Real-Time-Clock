@@ -94,6 +94,7 @@ void setup() {
   matrix.setFont(1, numeric7Se);
   matrix.displayZoneText(0, ss, PA_LEFT, 75, 0, PA_PRINT, PA_NO_EFFECT);
   matrix.displayZoneText(1, hh_mm, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);
+  autoSetIntensity((rtc.now()).hour());
 }
 
 void loop() {
