@@ -2,11 +2,10 @@
  * @file config.h
  * 
  * @brief
- *     Change the file name in "config.h"
- *
  *     Place here your:
  * 
  *      your max7219 pins
+ *      number of matrix devices
  *      network configurations
  *      ntp server address (check data/ntpservers.h)
  *      timezone (check data/timezones.h to choose yours or add a new one)
@@ -23,6 +22,8 @@
 #define CLK_PIN   D5
 #define DATA_PIN  D7
 #define CS_PIN    D8
+
+#define NUM_DEVICES 4
 
 const char SSID[] = "NTP-RTC";
 const char PASSWORD[] = "xxxxxx11";

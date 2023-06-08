@@ -10,7 +10,7 @@
  */
 #include <includes.h>
 
-MD_Parola matrix = MD_Parola(MD_MAX72XX::FC16_HW, DATA_PIN, CLK_PIN, CS_PIN, 4);
+MD_Parola matrix = MD_Parola(MD_MAX72XX::FC16_HW, DATA_PIN, CLK_PIN, CS_PIN, NUM_DEVICES);
 RTC_DS3231 rtc;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, NTPserver);
