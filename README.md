@@ -50,7 +50,7 @@ The time is picked from a NTP server and stored in the DS3231 RTC chip then it's
 # Setting up
 
 Before building the firmware and upload it you need to:
-- change the `config.h.dist` file in `config.h` in `data` directory
+- in `config` directory change the `config.h.dist` file name in `config.h` 
 - in the file `config.h` change the `SSID` and the `PASSWORD` variables with your network ones
 - in the file `config.h` change the `NTPserver` variable with the ones you prefer, choose one from `data/ntpservers.h` or add a new one in it
 - in the file `config.h` change the `MyTMZ` variable with the correct timezone of your country, choose one from `data/timezones.h` or add a new one in it
