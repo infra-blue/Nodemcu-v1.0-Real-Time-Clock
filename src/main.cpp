@@ -5,7 +5,7 @@
  *  The main source file
  * @version 0.1.2
  * 
- * @copyright GPL3 Copyright (c) 2023 
+ * @copyright Copyright (c) 2023 
  * 
  */
 #include <includes.h>

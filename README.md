@@ -4,6 +4,8 @@ A simple and usefull RTC based on ESP12e SoC.
 
 ![alt text](images/nodemcu_rtc.png)
 
+![alt text](images/clock-date-temp.gif)
+
 # How it works?
 - The time is picked from a NTP server and stored in the DS3231 RTC chip then it's displayed on the MAX7219 led matrix display.
 - By pressing the pushbutton you can change from time screen to the date screen or the temperature screen.
