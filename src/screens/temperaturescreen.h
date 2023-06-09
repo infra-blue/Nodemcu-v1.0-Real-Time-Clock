@@ -14,13 +14,17 @@
 #include <RTClib.h>
 #include "../lib/Font_Data.h"
 
-void print_date(char date[], RTC_DS3231 rtc, MD_Parola matrix) {
-  matrix.setZone(0, 0, 3);
-  matrix.setFont(0, numeric7Seg);
-  matrix.displayZoneText(0, date, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);
+void print_temp(char temp[], RTC_DS3231 rtc, MD_Parola matrix) {
+  matrix.setZone(0, 0, 0);
+  matrix.setZone(1, 1, 3);
+  matrix.setFont(0, numeric7Se);
+  matrix.setFont(1, numeric7Se);
+  matrix.displayZoneText(0, "C", PA_LEFT, 75, 0, PA_PRINT, PA_NO_EFFECT);
+  matrix.displayZoneText(1, temp, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);
   
-  sprintf(date, "%02d%02d%d", (rtc.now()).day(), (rtc.now()).month(), (rtc.now()).year());
+  sprintf(temp, "%3.1f", rtc.getTemperature());
 
   matrix.displayAnimate();
   matrix.displayReset(0);
+  matrix.displayReset(1);
 }

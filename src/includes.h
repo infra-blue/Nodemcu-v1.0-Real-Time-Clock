@@ -13,7 +13,7 @@
 #include <../configs/config.h>
 
 #include <screens/timescreen.h>
-#include <screens/datescren.h>
+#include <screens/datescreen.h>
 #include <screens/temperaturescreen.h>
 #include <screens/autosetintensity.h>
 
