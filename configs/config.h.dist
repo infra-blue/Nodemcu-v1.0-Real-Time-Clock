@@ -5,7 +5,7 @@
  *     Place here your:
  * 
  *      your max7219 pins
- *      your push button pin
+ *      your pushbutton pin
  *      number of matrix devices
  *      network configurations
  *      ntp server address (check data/ntpservers.h)

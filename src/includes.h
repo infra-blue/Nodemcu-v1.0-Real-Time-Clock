@@ -12,6 +12,11 @@
 #include <../lib/font_data.h>
 #include <../configs/config.h>
 
+#include <screens/timescreen.h>
+#include <screens/datescren.h>
+#include <screens/temperaturescreen.h>
+#include <screens/autosetintensity.h>
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <Adafruit_I2CDevice.h>

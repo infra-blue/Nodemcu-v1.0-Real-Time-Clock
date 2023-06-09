@@ -5,14 +5,16 @@ A simple and usefull RTC based on ESP12e SoC.
 ![alt text](images/nodemcu_rtc.png)
 
 # How it works?
-The time is picked from a NTP server and stored in the DS3231 RTC chip then it's displayed on the MAX7219 led matrix display.
+- The time is picked from a NTP server and stored in the DS3231 RTC chip then it's displayed on the MAX7219 led matrix display.
+- By pressing the pushbutton you can change from time screen to the date screen or the temperature screen.
 
 # What do you need?
 
 1. NodeMCU v1.0 (also called ESP8266 v2.0 or even 3.0)
 2. A DS3231 RTC and a LIR2032 battery (if you want to use a CR2032 battery remove the 200Ω resistor)
 3. A MAX7219 controlled matrix display (the one I used has 4 devices)
-4. A power supply
+4. A pushbutton to change the current screen
+5. A power supply
 
 # Connections
 
@@ -34,6 +36,13 @@ The time is picked from a NTP server and stored in the DS3231 RTC chip then it's
 | CLK | D5 |
 | DIN | D7 |
 | CS | D8 |
+
+### For pushbutton:
+
+| PB | NodeMCU |
+| ----------- | ----------- |
+|  + | D6 |
+|  - | GND |
     
 ### For the power supply:
 
@@ -55,7 +64,7 @@ Before building the firmware and upload it you need to:
 - in the file `config.h` change the `NTPserver` variable with the ones you prefer, choose one from `data/ntpservers.h` or add a new one in it
 - in the file `config.h` change the `MyTMZ` variable with the correct timezone of your country, choose one from `data/timezones.h` or add a new one in it
   
-You can also change the MAX7219 pins if needed and the number of matrix devices.
+You can also change the MAX7219 pins if needed, the number of matrix devices and the pushbutton pin.
 
 # Credits
 

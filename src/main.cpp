@@ -3,7 +3,7 @@
  * @author Leonardo Mirabella (https://github.com/infra-blue)
  * @brief 
  *  The main source file
- * @version 0.1.1
+ * @version 0.1.2
  * 
  * @copyright GPL3 Copyright (c) 2023 
  * 
@@ -24,57 +24,6 @@ char hh_mm[] = "00:00";
 char ss[] = "00";
 char date[] = "01 01 2000";
 char temp[] = "20.5 C";
-
-void print_time() {
-  matrix.setZone(0, 0, 0);
-  matrix.setZone(1, 1, 3);
-  matrix.setFont(0, numeric7Seg);
-  matrix.setFont(1, numeric7Se);
-  matrix.displayZoneText(0, ss, PA_LEFT, 75, 0, PA_PRINT, PA_NO_EFFECT);
-  matrix.displayZoneText(1, hh_mm, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);
-  
-  sprintf(hh_mm, "%02d%c%02d ", (rtc.now()).hour(), (((rtc.now()).second() % 2) ? ':' : ' '), (rtc.now()).minute());
-  sprintf(ss, "%02d", (rtc.now()).second());
-
-  matrix.displayAnimate();
-  matrix.displayReset(0);
-  matrix.displayReset(1);
-}
-
-void print_date() {
-  matrix.setZone(0, 0, 3);
-  matrix.setFont(0, numeric7Seg);
-  matrix.displayZoneText(0, date, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);
-  
-  sprintf(date, "%02d%02d%d", (rtc.now()).day(), (rtc.now()).month(), (rtc.now()).year());
-
-  matrix.displayAnimate();
-  matrix.displayReset(0);
-}
-
-void print_temp() {
-  matrix.setZone(0, 0, 0);
-  matrix.setZone(1, 1, 3);
-  matrix.setFont(0, numeric7Se);
-  matrix.setFont(1, numeric7Se);
-  matrix.displayZoneText(0, "C", PA_LEFT, 75, 0, PA_PRINT, PA_NO_EFFECT);
-  matrix.displayZoneText(1, temp, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);
-  
-  sprintf(temp, "%3.1f", rtc.getTemperature());
-
-  matrix.displayAnimate();
-  matrix.displayReset(0);
-  matrix.displayReset(1);
-}
-
-void autoSetIntensity(int hour) {
-  if(hour >= 0 && hour <= 6)
-    matrix.setIntensity(0);
-  else if(hour >= 7 && hour <= 22)
-    matrix.setIntensity(15);
-  else if(hour == 23)
-    matrix.setIntensity(0);
-}
 
 void setup() {
   Serial.begin(115200);
@@ -136,7 +85,7 @@ void setup() {
 }
 
 void loop() {
-  autoSetIntensity((rtc.now()).hour());
+  autoSetIntensity(rtc.now(), matrix);
 
   debouncer.update();
   if (debouncer.fell()) {
@@ -146,15 +95,15 @@ void loop() {
 
   switch (displaySelector) {
     case 0:
-    print_time();
+      print_time(hh_mm, ss, rtc, matrix);
       break;
     
     case 1:
-    print_date();
+      print_date(date, rtc, matrix);
       break;
 
     case 2:
-    print_temp();
+      print_temp(temp, rtc, matrix);
       break;
   }
 }
