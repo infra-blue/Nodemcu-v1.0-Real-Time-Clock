@@ -14,7 +14,9 @@
 #include <RTClib.h>
 #include "../lib/Font_Data.h"
 
-void print_temp(char temp[], RTC_DS3231 rtc, MD_Parola matrix) {
+void print_temp(RTC_DS3231 rtc, MD_Parola matrix) {
+  char temp[] = "20.5 C";
+
   matrix.setZone(0, 0, 0);
   matrix.setZone(1, 1, 3);
   matrix.setFont(0, numeric7Se);

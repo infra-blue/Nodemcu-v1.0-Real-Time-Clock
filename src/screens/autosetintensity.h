@@ -13,8 +13,8 @@
 #include <MD_Parola.h>
 #include <RTClib.h>
 
-void autoSetIntensity(DateTime now, MD_Parola matrix) {
-  int hour = now.hour();
+void autoSetIntensity(RTC_DS3231 rtc, MD_Parola matrix) {
+  int hour = rtc.now().hour();
 
   if(hour >= 0 && hour <= 6)
     matrix.setIntensity(0);

@@ -14,7 +14,9 @@
 #include <RTClib.h>
 #include "../lib/Font_Data.h"
 
-void print_date(char date[], RTC_DS3231 rtc, MD_Parola matrix) {
+void print_date(RTC_DS3231 rtc, MD_Parola matrix) {
+  char date[] = "01012000";
+
   matrix.setZone(0, 0, 3);
   matrix.setFont(0, numeric7Seg);
   matrix.displayZoneText(0, date, PA_CENTER, 75, 0, PA_PRINT, PA_NO_EFFECT);

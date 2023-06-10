@@ -14,7 +14,10 @@
 #include <RTClib.h>
 #include "../lib/Font_Data.h"
 
-void print_time(char hh_mm[], char ss[], RTC_DS3231 rtc, MD_Parola matrix) {
+void print_time(RTC_DS3231 rtc, MD_Parola matrix) {
+  char hh_mm[] = "00:00";
+  char ss[] = "00";
+
   matrix.setZone(0, 0, 0);
   matrix.setZone(1, 1, 3);
   matrix.setFont(0, numeric7Seg);

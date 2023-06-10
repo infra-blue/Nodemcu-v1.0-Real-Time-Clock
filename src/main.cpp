@@ -20,11 +20,6 @@ static uint32_t lastPinCheck = 0;
 static uint32_t displaySelector = 0;
 int maxtimeout = 25;
 
-char hh_mm[] = "00:00";
-char ss[] = "00";
-char date[] = "01 01 2000";
-char temp[] = "20.5 C";
-
 void setup() {
   Serial.begin(115200);
   
@@ -85,7 +80,7 @@ void setup() {
 }
 
 void loop() {
-  autoSetIntensity(rtc.now(), matrix);
+  autoSetIntensity(rtc, matrix);
 
   debouncer.update();
   if (debouncer.fell()) {
@@ -95,15 +90,15 @@ void loop() {
 
   switch (displaySelector) {
     case 0:
-      print_time(hh_mm, ss, rtc, matrix);
+      print_time(rtc, matrix);
       break;
     
     case 1:
-      print_date(date, rtc, matrix);
+      print_date(rtc, matrix);
       break;
 
     case 2:
-      print_temp(temp, rtc, matrix);
+      print_temp(rtc, matrix);
       break;
   }
 }
