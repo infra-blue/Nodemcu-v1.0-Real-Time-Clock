@@ -12,9 +12,7 @@
 #include <../lib/font_data.h>
 #include <../configs/config.h>
 
-#include <screens/timescreen.h>
-#include <screens/datescreen.h>
-#include <screens/temperaturescreen.h>
+#include <screens/screens.h>
 #include <screens/autosetintensity.h>
 
 #include <Arduino.h>

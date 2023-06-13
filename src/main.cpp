@@ -89,15 +89,15 @@ void loop() {
   }
 
   switch (displaySelector) {
-    case 0:
+    case time_screen:
       print_time(rtc, matrix);
       break;
     
-    case 1:
+    case date_screen:
       print_date(rtc, matrix);
       break;
 
-    case 2:
+    case temperature_screen:
       print_temp(rtc, matrix);
       break;
   }
