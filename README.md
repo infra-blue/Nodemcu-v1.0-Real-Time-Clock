@@ -2,9 +2,8 @@
 
 A simple and usefull RTC based on ESP12e SoC.
 
-![alt text](images/nodemcu_rtc.png)
-
-![alt text](images/clock-date-temp.gif)
+<p align="left"><img align="left" src="images/nodemcu_rtc.png"  width="37.2%" height="20%"/></p>
+<p align="left"><img align="left" src="images/clock-date-temp.gif" width="59%" height="40%"/></p>
 
 # How it works?
 - The time is picked from a NTP server and stored in the DS3231 RTC chip then it's displayed on the MAX7219 led matrix display.
